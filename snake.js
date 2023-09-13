@@ -12,12 +12,14 @@ class Snake{
         this.controls = new Controls();
     };
     draw(ctx){
+        ctx.strokeStyle = 'black';
+        ctx.fillStyle = this.color;
         this.items.forEach(item =>{
-            ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.arc(...item, this.radius, 0, 2*Math.PI);
             ctx.fill();
-        })
+            ctx.stroke();
+        });
     };
     update(){
         this.#move();
