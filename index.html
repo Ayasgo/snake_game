@@ -1,15 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Snake Game</title>
-        <link rel="stylesheet" href="style.css"> 
-    </head>
-    <body>
-        <canvas id="myCanvas"></canvas>
-        <script src="utils.js"></script>
-        <script src="controls.js"></script>
-        <script src="snake.js"></script>
-        <script src="main.js"></script>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="container-head">
+        <div class="info">
+          <span class="score">Score: 1</span>
+          <span class="lifes">Lifes: 3</span>
+        </div>
+        <div class="foods">
+          <span class="food"
+            ><i style="background-color: lightcoral"></i>-2
+            item</span
+          >
+          <span class="food"
+            ><i style="background-color: lime"></i>+1 item</span
+          >
+          <span class="food"
+            ><i style="background-color: lightyellow"></i> +1
+            life</span
+          >
+          <span class="food"
+            ><i style="background-color: lightslategrey"></i>-1
+            life</span
+          >
+        </div>
+      </div>
+      <canvas id="myCanvas"></canvas>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="controls.js"></script>
+    <script src="food.js"></script>
+    <script src="snake.js"></script>
+    <script src="main.js"></script>
+  </body>
 </html>

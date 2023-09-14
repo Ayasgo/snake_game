@@ -9,20 +9,11 @@ class Controls{
     };
     #addKeyboardsListeners(){
         document.onkeydown=(event)=>{
-            switch(event.key){
-                case "ArrowUp":
-                    this.#updateKeys('fo');
-                    break;
-                case "ArrowDown":
-                    this.#updateKeys('re');
-                    break;
-                case "ArrowRight":
-                    this.#updateKeys('ri');
-                    break;
-                case "ArrowLeft":
-                    this.#updateKeys('le');
-                    break;
-            };
+            let key = event.key;
+            if(key === "ArrowUp" && !this.reverse) this.#updateKeys('fo');
+            else if(key === "ArrowDown" && !this.forward) this.#updateKeys('re');
+            else if(key === "ArrowRight" && !this.left) this.#updateKeys('ri');
+            else if( key === "ArrowLeft" && !this.right) this.#updateKeys('le');
         };
     };
     #setKeyToFalse(...keys){
@@ -43,7 +34,7 @@ class Controls{
     };
     #updateKeys(key){
         for(const _key of ['fo', 're', 'ri', 'le']){
-            if(_key === key) this.#setKeyToTrue(_key);
+            if(_key === key ) this.#setKeyToTrue(_key);
             else this.#setKeyToFalse(_key);
         };
     };
