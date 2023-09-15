@@ -2,8 +2,12 @@ body{
     margin: 0;
     padding: 0;
     background-color: lightblue;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .container{
+    position: relative;
     width: 500px;
     margin: 40px auto 0px auto;
 }
@@ -25,8 +29,9 @@ body{
 }
 .food{
     display: flex;
-    column-gap: 10px;
+    column-gap: 3px;
     align-items: center;
+    font-size: medium;
 }
 .food i{
     display: flex;
@@ -39,4 +44,21 @@ body{
     background-color: lightcyan;
     width: 500px;
     height: 500px;
+}
+.blurElement{
+    opacity: 0.5;
+}
+#message{
+    position: absolute;
+    white-space: nowrap;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    font-weight: 700;
+    opacity: 0;
+    transition-property: opacity;
+}
+#mycanvas, #message{
+    transition-duration: .5s;
 }

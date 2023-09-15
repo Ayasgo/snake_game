@@ -26,6 +26,8 @@ class Snake{
         });
     };
     update(w,h){
+        if( this.controls.paused) return;
+
         this.#move();
         if(this.#snakeEatFood()){
             this.food.effect(this);
@@ -42,15 +44,27 @@ class Snake{
         const lastItem = this.items[this.items.length-1];
         for( let i=this.items.length-1; i>0; i--) this.items[i] = this.items[i-1];
         [this.x, this.y] = this.items[0] = [x, y];   
-        if( this.items.length < this.length) this.items.push(lastItem);       
+        if( this.items.length < this.length) this.items.push(lastItem); 
+        else if(this.items.length > this.length && this.items.length  >=3) {
+            for(let i=0; i< this.items.length - this.length; i++)
+                this.items.pop();
+        };
     };
     #snakeEatFood(){
-        return this.x == this.food.x && this.y == this.food.y
+        return this.x == this.food.x && this.y == this.food.y;
     };
     #putFood(){
-        this.food = new Food(   ...getRandomPosition(this.canvas_size),
-                                this.radius-1);
-        this.food.choise_type();
+        if(!this.controls.paused || !this.food){
+            this.food = new Food(   ...getRandomPosition(this.canvas_size),
+                                    this.radius-1);
+            this.food.choise_type();
+    }
+        if(!this.controls.paused){
+            if( this.foodTimer ) clearTimeout(this.foodTimer);
+            this.foodTimer = setTimeout(()=>{
+                this.#putFood();
+            }, 6000);
+        }
     };
     #checkCollision(w, h){
         let head = this.items[0];

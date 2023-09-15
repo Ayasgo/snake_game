@@ -37,7 +37,6 @@ class Food{
                 possibilities.push(key);
             };
         };
-        console.log(possibilities)
         this.type = possibilities[randrange(0, possibilities.length)] || '+item';
         this.choise_color();
     };
