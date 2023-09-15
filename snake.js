@@ -1,13 +1,14 @@
 class Snake{
     constructor(x, y, radius, canvas_size, shape='cercle', color="lime"){
         this.length = 2;
-        this.x = x;
-        this.y = y;
+        this.x = this.x0 = x;
+        this.y = this.y0 = y;
         this.radius = radius;
         this.canvas_size = canvas_size;
         this.color = color;
         this.score = 0;
-        this.isGameOver = false;
+        this.lifes = 3;
+        this.isalive = true;
         this.items = [
             [this.x, this.y]
         ];
@@ -27,8 +28,7 @@ class Snake{
     update(w,h){
         this.#move();
         if(this.#snakeEatFood()){
-            this.score++;
-            this.length++;
+            this.food.effect(this);
             this.#putFood();
         };
         this.#checkCollision(w,h);
@@ -49,14 +49,32 @@ class Snake{
     };
     #putFood(){
         this.food = new Food(   ...getRandomPosition(this.canvas_size),
-                                this.radius-2);
+                                this.radius-1);
+        this.food.choise_type();
     };
     #checkCollision(w, h){
         let head = this.items[0];
         for(let item of this.items.slice(1)) 
-            if(arraysAreEqual(head, item))
-                this.isGameOver = true;
+            if(arraysAreEqual(head, item)){
+                this.decrementLifes();
+                this.#initialize();
+            }
         
-        if( this.x<0 || this.x>w || this.y<0  || this.y>h) this.isGameOver = true;
+        if( this.x<0 || this.x>w || this.y<0  || this.y>h) {
+            this.decrementLifes();
+            this.#initialize();
+        }
+    };
+    #initialize(){
+        this.x = this.x0;
+        this.y = this.y0;
+        this.items = [
+            [this.x, this.y]
+        ];
+        this.controls = new Controls();
+    };
+    decrementLifes(){
+        this.lifes--;
+        if(this.lifes <=0) this.isalive = false;
     };
 };
