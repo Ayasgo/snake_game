@@ -17,12 +17,12 @@ class Snake{
         this.#putFood();
     };
     draw(ctx){
-        ctx.strokeStyle = 'black';
+        ctx.strokeStyle = 'rgb(0, 206, 0)';
         ctx.fillStyle = this.color;
-        this.items.forEach(item =>{
-            drawCercle(ctx, ...item, this.radius);
+        //drawHead(ctx, ...this.items[0], this.radius, this.controls.lastUpdatedKey);
+        this.items.slice(0).forEach(item =>{
+            drawRect(ctx, ...item, this.radius);
             ctx.fill();
-            ctx.stroke();
         });
     };
     update(w,h){
